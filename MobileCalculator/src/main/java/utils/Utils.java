@@ -30,17 +30,18 @@ public class Utils {
 		driver = new AppiumDriver<WebElement>(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	}
-	
+
 	public static File gerarScreenshot(Scenario cenario) {
-	    final byte [] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-	    cenario.embed(screenshot, "image/png");
-	    File imagem = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-	    try {
-			
-	    	FileUtils.copyFile(imagem,(new File("./target/screenshots",cenario.getName() + "-" + cenario.getStatus() + ".png")));
+		final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+		cenario.embed(screenshot, "image/png");
+		File imagem = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		try {
+
+			FileUtils.copyFile(imagem,
+					(new File("./target/screenshots", cenario.getName() + "-" + cenario.getStatus() + ".png")));
 		} catch (Exception e) {
-		  
-		  e.printStackTrace();
+
+			e.printStackTrace();
 		}
 		return imagem;
 	}
